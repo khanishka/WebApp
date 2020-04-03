@@ -27,5 +27,8 @@ node {
     stage('Publish build info') {
         server.publishBuildInfo buildInfo
     }
+    stage('Run tests'){
+	echo 'Running tests'
+    }
     }
 	 
