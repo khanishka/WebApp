@@ -27,9 +27,10 @@ node {
    	
 
 	stage('SonarQube analysis') {
-
-	withSonarQubeEnv(credentialsId: 'vidhusecret') {
-    sh 'sonar:sonar -Dsonar.host.url=http://40.78.68.176:9000/ -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java -Dsonar.username=admin -Dsonar.password=admin' 
+        def scannerHome = tool 'SonarScanner 4.0';
+	withSonarQubeEnv('My SonarQube Server') {
+	sh "${scannerHome}/bin/sonar-scanner"
+    //sh 'sonar:sonar -Dsonar.host.url=http://40.78.68.176:9000/ -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java -Dsonar.username=admin -Dsonar.password=admin' 
 }
 
     stage('Publish build info') {
